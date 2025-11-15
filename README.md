@@ -1,4 +1,6 @@
 ⚡ EV Price Predictor
+
+
 A simple web application built with Streamlit to predict the price of an electric vehicle (EV) based on its key specifications.
 
 The app uses a pre-trained RandomForestRegressor model to estimate the price and includes an interactive dashboard to explore how changing a single feature (like range or battery size) affects the predicted value.
