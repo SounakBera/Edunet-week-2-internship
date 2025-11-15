@@ -1,85 +1,89 @@
-⚡ Electric Vehicle Price Prediction — Data Analysis & Model Training
-📘 Overview
+⚡ EV Price Predictor
+A simple web application built with Streamlit to predict the price of an electric vehicle (EV) based on its key specifications.
 
-This project focuses on predicting the price range of electric vehicles (EVs) using machine learning techniques. It involves data preprocessing, feature engineering, model training, and performance evaluation using a Random Forest Regressor.
+The app uses a pre-trained RandomForestRegressor model to estimate the price and includes an interactive dashboard to explore how changing a single feature (like range or battery size) affects the predicted value.
 
-🧩 Workflow Summary
+(Add a screenshot of your running app.py here)
 
+Features
+Price Prediction: Get an instant price estimate based on 6 key EV specifications.
 
-1️⃣ Data Preparation
+Interactive Controls: Use sliders and number inputs to adjust:
 
-Input file: cars_data_RAW.csv
+🔋 Battery Capacity (kWh)
 
-Removed duplicates and handled missing values (median imputation).
+🚀 0-100 km/h (sec)
 
-Cleaned numeric fields (removed units like km/h, sec, Wh/km, etc.).
+🪑 Number of Seats
 
-Encoded categorical variables using LabelEncoder.
+🏎️ Top Speed (km/h)
 
-2️⃣ Feature Engineering
+🛣️ Range (km)
 
-Target variable: price-range
+⚡ Efficiency (Wh/km)
 
-Split data: 80% training, 20% testing
+Feature-Price Explorer: An interactive Matplotlib graph shows how the predicted price changes as you vary one feature, while holding all others constant.
 
-Standardized numeric features using StandardScaler
+Project Structure
+.
+├── app.py              # The main Streamlit web application
+├── model.pkl           # The pre-trained scikit-learn pipeline (Scaler + Model)
+├── train_model.py      # Script to train and save the model
+├── requirements.txt    # Python dependencies
+└── cars_data_cleaned.csv # (Required for training - not included)
 
-3️⃣ Model Training
+🚀 How to Run the App
+Follow these steps to get the application running on your local machine.
 
-Model used: RandomForestRegressor(n_estimators=100, random_state=42)
+1. Clone the Repository
+git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+cd your-repo-name
 
+2. Create a Virtual Environment (Recommended)
+# For Windows
+python -m venv venv
+venv\Scripts\activate
 
-Trained to predict price range based on EV specifications such as battery capacity, acceleration, top speed, efficiency, and range.
+# For macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
 
-4️⃣ Model Evaluation
-Metric	Description	Result
-R² Score	Proportion of variance explained	0.87 (Very Good)
-MAE	Mean Absolute Error	≈ 1200
-RMSE	Root Mean Square Error	≈ 1895
+3. Install Dependencies
+Install all the required libraries from the requirements.txt file.
 
-✅ Conclusion: The model explains 87% of price variation, showing strong predictive accuracy.
+pip install -r requirements.txt
 
-5️⃣ Model Saving
+4. Run the Streamlit App
+Now, you can launch the application.
 
-The trained model and scaler are saved in the models/ directory:
+streamlit run app.py
 
-models/
-    ├── ev_price_model.pkl
-    └── scaler.pkl
+A new tab should automatically open in your web browser, pointing to http://localhost:8501.
 
+🧠 (Optional) How to Re-train the Model
+The included model.pkl file is already trained. However, if you want to re-train the model (e.g., if you get new data), you can follow these steps.
 
-These files are used later for prediction in the Streamlit dashboard.
+1. Get the Data
+Make sure you have the dataset named cars_data_cleaned.csv in the same directory. This file is required by train_model.py.
 
-⚙️ Requirements
+(Note: This dataset is not included in this repository.)
 
-Install all dependencies before running:
+2. Run the Training Script
+Execute the train_model.py script. This will load the CSV, train a new RandomForestRegressor pipeline (including a StandardScaler), and save the new model over the old model.pkl file.
 
-pip install streamlit pyngrok pandas numpy scikit-learn joblib python-dotenv plotly prophet
+python train_model.py
 
-🚀 Running the Project
-# 1. Train the model
-python ev_vehicle.py
+After the script finishes, you can restart your Streamlit app to use the newly trained model.
 
+🛠️ Libraries Used
+Streamlit: For building the interactive web app.
 
-Once executed, you’ll get console output showing model metrics and saved files in the models/ folder.
+Pandas: For data manipulation.
 
-📈 Example Output
-✅ Model Training Complete!
-R² Score: 0.87
-MAE: 1200.45
-RMSE: 1895.67
-✅ Model and Scaler saved successfully!
-📁 Files saved: ['ev_price_model.pkl', 'scaler.pkl']
+Scikit-learn: For the machine learning pipeline (RandomForestRegressor, StandardScaler).
 
-🧠 Insights
+Joblib: For loading and saving the trained model.
 
-Battery capacity, acceleration, and efficiency strongly affect EV price.
+Numpy: For numerical operations.
 
-Model generalizes well and is not overfitting (train R² ≈ test R²).
-
-Can be extended with XGBoost, hyperparameter tuning, or integrated Streamlit UI for real-time predictions.
-
-<img width="1300" height="799" alt="image" src="https://github.com/user-attachments/assets/fa12901b-4ae4-46bb-8949-0a4a501d8bfe" />
-<img width="910" height="708" alt="Screenshot 2025-10-28 173916" src="https://github.com/user-attachments/assets/0db507b9-f7ae-4482-b6da-30ad67b4889a" />
-
-
+Matplotlib: For creating the "Feature Relationships" graph.
